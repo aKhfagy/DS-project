@@ -7,6 +7,7 @@ StateMachine::StateMachine() {
 
 void StateMachine::change(std::string newStateName) {
 	current->exit();
+	assert(states[newStateName] != nullptr);
 	current = states[newStateName];
 	current->enter();
 }
