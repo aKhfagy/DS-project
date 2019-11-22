@@ -1,2 +1,5 @@
-﻿  main.cpp
+﻿  BasicState.cpp
+  main.cpp
+  StateMachine.cpp
+  Generating Code...
   Sudoku.vcxproj -> C:\GitHub projects\DS-project\Sudoku\x64\Debug\Sudoku.exe

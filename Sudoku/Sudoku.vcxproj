@@ -123,7 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BasicState.h" />
+    <ClInclude Include="StateMachine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
