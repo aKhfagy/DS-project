@@ -123,12 +123,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArrList.cpp" />
     <ClCompile Include="BasicState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Read_From_File.cpp" />
     <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArrList.h" />
     <ClInclude Include="BasicState.h" />
     <ClInclude Include="Read_From_File.h" />
     <ClInclude Include="StateMachine.h" />
