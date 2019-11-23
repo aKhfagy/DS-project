@@ -24,6 +24,9 @@
     <ClCompile Include="BasicState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Read_From_File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine.h">
@@ -32,5 +35,13 @@
     <ClInclude Include="BasicState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Read_From_File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="SudokuData.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
