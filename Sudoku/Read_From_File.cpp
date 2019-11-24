@@ -7,7 +7,11 @@ Read_From_File::Read_From_File()
 	ifstream inputFile;
 	inputFile.open("Text.txt");
 	if (!inputFile)
-		cout << "Error";
+	{
+		cout << "Error in finding file";
+		system("pause");
+		exit(-1);
+	}
 	inputFile >> sizeOfBoard;
 	arrayBoard = new int*[sizeOfBoard];
 	for (int i = 0; i < sizeOfBoard; i++)
