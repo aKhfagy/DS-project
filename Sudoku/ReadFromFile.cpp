@@ -33,13 +33,7 @@ ReadFromFile::ReadFromFile()
 			}
 		}
 	}
-	else
-	{
-		cout << "Error reading board" << endl;
-		system("pause");
-		exit(-1);
-	}
-
+	/*
 	//output 
 	for (int i = 0; i < sizeOfBoard; i++)
 	{
@@ -49,4 +43,5 @@ ReadFromFile::ReadFromFile()
 		}
 		cout << endl;
 	}
+	*/
 }
