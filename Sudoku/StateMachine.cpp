@@ -1,4 +1,5 @@
 #include "StateMachine.h"
+#include "assert.h"
 
 StateMachine::StateMachine() {
 	states["basic"] = new BasicState();

@@ -24,10 +24,10 @@
     <ClCompile Include="BasicState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Read_From_File.cpp">
+    <ClCompile Include="ArrList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArrList.cpp">
+    <ClCompile Include="ReadFromFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,10 +38,10 @@
     <ClInclude Include="BasicState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Read_From_File.h">
+    <ClInclude Include="ArrList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArrList.h">
+    <ClInclude Include="ReadFromFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

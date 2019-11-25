@@ -1,9 +1,9 @@
 #include <iostream>
-#include "Read_From_File.h"
+#include "ReadFromFile.h"
 using namespace std;
 
 int main() {
 
-	Read_From_File r;
+	ReadFromFile r;
 	return 0;
 }
