@@ -12,9 +12,9 @@ ReadFromFile::ReadFromFile()
 		system("pause");
 		exit(-1);
 	}
+	inputFile >> sizeOfBoard;
 	if (!inputFile.eof())	// if not End Of File 
 	{
-		inputFile >> sizeOfBoard;
 		arrayBoard = new int*[sizeOfBoard];
 		for (int i = 0; i < sizeOfBoard; i++)
 		{
@@ -32,6 +32,12 @@ ReadFromFile::ReadFromFile()
 				else arrayBoard[i][j] = x - '0';
 			}
 		}
+	}
+	else
+	{
+		cout << "Error in reading board" << endl;
+		system("pause");
+		exit(-1);
 	}
 	/*
 	//output 
