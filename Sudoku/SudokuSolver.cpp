@@ -30,8 +30,8 @@ cell SudokuSolver::findNextCellToFill() {
 	for (int i = 0; i < size; ++i)
 		for (int j = 0; j < size; ++j)
 			if (grid[i][j] == 0)
-				return std::make_pair(i, j);
-	return std::make_pair(NIL, NIL);
+				return cell(i, j);
+	return cell(NIL, NIL);
 }
 
 bool SudokuSolver::checkDiagonals() {
@@ -120,24 +120,94 @@ void SudokuSolver::display() {
 			else if (j == size - 1)
 				std::cout << '|';
 		}
-		if ((i + 1) % sectorSize == 0) 
+		if ((i + 1) % sectorSize == 0)
 			std::cout << "\n";
 		std::cout << '\n';
 	}
 }
 
+void SudokuSolver::saveToFile(std::ofstream& outFile) {
+	int sectorSize = int(sqrt(size));
+
+	for (int i = 0; i < size; ++i) {
+		for (int j = 0; j < size; ++j) {
+			if (j == 0)
+				outFile << ' ' << '|' << ' ';
+			outFile << grid[i][j] << ' ';
+			if ((j + 1) % sectorSize == 0 and j != size - 1)
+				outFile << '|' << ' ';
+			else if (j == size - 1)
+				outFile << '|';
+		}
+		if ((i + 1) % sectorSize == 0)
+			outFile << "\n";
+		outFile << '\n';
+	}
+	outFile << "\n\n";
+}
+
+void SudokuSolver::getAll() {
+	if (giveOutAll())
+		puts("Your output was saved to output.txt");
+	else
+		puts("There is no solution");
+}
+
+void SudokuSolver::outputAll(bool& flag, std::ofstream& file) {
+	cell here = findNextCellToFill();
+	int x = here.first, y = here.second;
+	if (x == NIL) {
+		flag = true;
+		saveToFile(file);
+	}
+	for (int num = 1; num <= size; ++num) {
+		grid[x][y] = num;
+		if (isValid(x, y))
+			if (solveSudoku())
+				flag = true;
+		grid[x][y] = 0;
+	}
+	flag |= false;
+}
+
+bool SudokuSolver::giveOutAll() {
+	bool flag;
+	std::ofstream outFile("output.txt");
+	outputAll(flag, outFile);
+	outFile.close();
+	return flag;
+}
+
 bool SudokuSolver::solveSudoku() {
 	cell here = findNextCellToFill();
 	int x = here.first, y = here.second;
-	if (x == NIL) 
+	if (x == NIL)
 		return true;
 	for (int num = 1; num <= size; ++num) {
 		grid[x][y] = num;
-		if (isValid(x, y)) {
+		if (isValid(x, y))
 			if (solveSudoku())
 				return true;
-		}
 		grid[x][y] = 0;
+	}
+	return false;
+}
+
+bool SudokuSolver::solveIterative() {
+	std::queue <Adress> location;
+	location.push(Adress(findNextCellToFill(), cell(NIL, NIL), 1));
+	while (not location.empty()) {
+		Adress node = location.front();
+		cell c = node.here;
+		if (c == cell(NIL, NIL))
+			return true;
+		location.pop();
+		for (int i = node.val; i <= size; ++i) {
+			grid[c.first][c.second] = i;
+			if (isValid(c.first, c.second)) {
+				location.push(Adress(findNextCellToFill(), c, i));
+			}
+		}
 	}
 	return false;
 }
