@@ -1,7 +1,9 @@
 ﻿  ArrList.cpp
   BasicState.cpp
+  graph.cpp
+c:\users\pc\documents\github\ds-project\sudoku\graph.cpp(143): error C2181: illegal else without matching if
   main.cpp
   ReadFromFile.cpp
   StateMachine.cpp
+  SudokuSolver.cpp
   Generating Code...
-  Sudoku.vcxproj -> C:\Users\PC\Documents\GitHub\DS-project\Sudoku\x64\Debug\Sudoku.exe

@@ -30,6 +30,12 @@
     <ClCompile Include="ReadFromFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SudokuSolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMachine.h">
@@ -42,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ReadFromFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SudokuSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
