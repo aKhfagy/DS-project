@@ -15,15 +15,22 @@ ReadFromFile::ReadFromFile()
 	inputFile >> sizeOfBoard;
 	if (!inputFile.eof())	// if not End Of File 
 	{
-		arrayBoard = new int[sizeOfBoard*sizeOfBoard];
-		char x;
-		for (int i = 0; i < sizeOfBoard*sizeOfBoard; i++)
+		arrayBoard = new int*[sizeOfBoard];
+		for (int i = 0; i < sizeOfBoard; i++)
 		{
+			arrayBoard[i] = new int[sizeOfBoard];
+		}
+		char x;
+		for (int i = 0; i < sizeOfBoard; i++)
+		{
+			for (int j = 0; j < sizeOfBoard; j++)
+			{
 
-			inputFile >> x;
-			if (x == '|') i--;
-			else if (x == '-') arrayBoard[i] = -1; //empty space = -1 in the array
-			else arrayBoard[i] = x - '0';
+				inputFile >> x;
+				if (x == '|')j--;
+				else if (x == '-') arrayBoard[i][j] = -1; //empty space = -1 in the array
+				else arrayBoard[i][j] = x - '0';
+			}
 		}
 	}
 	else
@@ -33,16 +40,14 @@ ReadFromFile::ReadFromFile()
 		exit(-1);
 	}
 	/*
-	//output
-	for (int i = 0; i < sizeOfBoard*sizeOfBoard; i++)
+	//output 
+	for (int i = 0; i < sizeOfBoard; i++)
 	{
-		if (i != 0 && i % sizeOfBoard == 0) cout << endl;
-		cout << arrayBoard[i] << " ";
+		for (int j = 0; j < sizeOfBoard; j++)
+		{
+			cout << arrayBoard[i][j]<<" ";
+		}
+		cout << endl;
 	}
 	*/
-}
-
-ReadFromFile::~ReadFromFile()
-{
-	delete[] arrayBoard;
 }

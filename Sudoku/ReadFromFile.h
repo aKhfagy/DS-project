@@ -4,8 +4,7 @@ class ReadFromFile
 {
 public:
 	int sizeOfBoard;
-	int*arrayBoard;
+	int**arrayBoard;
 	ReadFromFile();
-	~ReadFromFile();
 };
 
