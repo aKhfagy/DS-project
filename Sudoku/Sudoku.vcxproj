@@ -123,20 +123,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ArrList.cpp" />
     <ClCompile Include="BasicState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainState.cpp" />
     <ClCompile Include="ReadFromFile.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="SudokuSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArrList.h" />
     <ClInclude Include="BasicState.h" />
+    <ClInclude Include="globals.h" />
+    <ClInclude Include="MainState.h" />
     <ClInclude Include="ReadFromFile.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="SudokuSolver.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="SudokuData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Sudoku.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

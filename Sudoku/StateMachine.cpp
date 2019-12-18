@@ -3,12 +3,13 @@
 
 StateMachine::StateMachine() {
 	states["basic"] = new BasicState();
+	states["main"] = new MainState();
 	current = states["basic"];
 }
 
 void StateMachine::change(std::string newStateName) {
 	current->exit();
-	assert(states[newStateName] != nullptr);
+	assert(states.find(newStateName) != states.end());
 	current = states[newStateName];
 	current->enter();
 }

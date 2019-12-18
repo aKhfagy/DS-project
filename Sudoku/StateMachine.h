@@ -1,11 +1,12 @@
 #pragma once
 #include "BasicState.h"
-#include <unordered_map>
+#include "MainState.h"
+#include <map>
 #include <string>
 
 class StateMachine
 {
-	std::unordered_map <std::string, BasicState*> states;
+	std::map <std::string, BasicState*> states;
 	BasicState* current;
 public:
 	StateMachine();

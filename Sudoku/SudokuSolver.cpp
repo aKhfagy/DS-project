@@ -35,7 +35,7 @@ cell SudokuSolver::findNextCellToFill() {
 }
 
 bool SudokuSolver::checkDiagonals() {
-	bool* vis = new bool[size + 1];
+	bool* vis = new bool[int(size + 1)];
 
 	// TODO: fix this code
 
@@ -65,7 +65,7 @@ bool SudokuSolver::checkDiagonals() {
 bool SudokuSolver::isValid(int x, int y) {
 	int sectorSize = int(sqrt(size));
 
-	bool* vis = new bool[size + 1];
+	bool* vis = new bool[int(size + 1)];
 
 	for (int i = 0; i <= size; ++i)
 		vis[i] = false;
