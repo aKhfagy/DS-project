@@ -7,7 +7,7 @@
 #include "graph.h"
 #include "ReadFromFile.h"
 #include "SudokuSolver.h"
-#include "StateMachine.h"
+//#include "StateMachine.h"
 using namespace Gdiplus;
 #pragma comment (lib,"Gdiplus.lib")
 using namespace std;
