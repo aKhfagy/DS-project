@@ -79,7 +79,8 @@ void SudokuSolver::saveToFile(std::ofstream& outFile) {
 			outFile << "\n";
 		outFile << '\n';
 	}
-	outFile << "\n\n";
+	outFile << "\n";
+	outFile << "________________________________________________________\n";
 }
 
 void SudokuSolver::outputAll(bool& flag, std::ofstream& file) {
@@ -101,7 +102,7 @@ void SudokuSolver::outputAll(bool& flag, std::ofstream& file) {
 
 bool SudokuSolver::giveOutAll() {
 	bool flag;
-	std::ofstream outFile("res\outputAll.txt");
+	std::ofstream outFile("outputAll.txt");
 	outputAll(flag, outFile);
 	outFile.close();
 	return flag;
@@ -123,13 +124,13 @@ bool SudokuSolver::solveSudoku() {
 }
 
 void SudokuSolver::failed() {
-	std::ofstream outFile("res\outputSingle.txt");
+	std::ofstream outFile("outputSingle.txt");
 	outFile << "There is no solution\n";
 	outFile.close();
 }
 
 void SudokuSolver::saveSingle() {
-	std::ofstream outFile("res\outputSingle.txt");
+	std::ofstream outFile("outputSingle.txt");
 	saveToFile(outFile);
 	outFile.close();
 }

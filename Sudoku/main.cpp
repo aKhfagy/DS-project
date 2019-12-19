@@ -3,7 +3,6 @@
 int main() 
 {
 	graph g(16);
-	g.connect();
 	g.greedyColoring();
 
 	system("pause");
