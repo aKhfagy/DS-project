@@ -11,16 +11,16 @@ using namespace std;
 class graph
 {
 	int V;
+	ReadFromFile obj;
 	vector<vector<int>> adj;
 	int* color;
 	bool* available;
-	//int arrayboard[4][4];
-
-public:
-	graph(int v);
 	void addEdge(int v1, int v2);
-	void greedyColoring();
-	void connect();
 	void subbox(int,int);
+	void connect();
+public:
+	graph(ReadFromFile read);
+	void getAll();
+	void greedyColoring();
 	~graph();
 };

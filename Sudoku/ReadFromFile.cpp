@@ -2,11 +2,14 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-ReadFromFile::ReadFromFile()
+
+ReadFromFile::ReadFromFile() {}
+
+ReadFromFile::ReadFromFile(string name)
 {
 	ifstream inputFile;
 	
-	inputFile.open("SudokuData.txt");
+	inputFile.open(name);
 	if (!inputFile)		//alternative to file.fail()
 	{
 		cout << "Error in finding file" << endl;

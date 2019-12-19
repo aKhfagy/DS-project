@@ -3,12 +3,13 @@
 using namespace std;
  
  
-graph::graph(int v)
+graph::graph(ReadFromFile read)
 {
-	V = v;
-	adj.resize(v);
-	color = new int[v];
-	available = new bool[v];
+	obj = read;
+	V = obj.sizeOfBoard * obj.sizeOfBoard;
+	adj.resize(V);
+	color = new int[V];
+	available = new bool[V];
 }
  
 void graph::addEdge(int v1, int v2) {
@@ -18,6 +19,16 @@ void graph::addEdge(int v1, int v2) {
  
 }
  
+void graph::getAll() {
+	for (int i = 0; i < obj.vectorBoard.size(); ++i) {
+		for (int j = 0; j < obj.vectorBoard[i].size(); ++j)
+			if (obj.vectorBoard[i][j] == -1)
+				obj.vectorBoard[i][j] = 0;
+	}
+	SudokuSolver(obj.vectorBoard, int(sqrt(V))).getAll();
+	puts("Output was saved in outputAll.txt");
+}
+
 void graph::connect() 
 {
  
@@ -111,8 +122,6 @@ void graph::subbox(int j, int n) // j is the leading element in every sub box,
 }
 void graph::greedyColoring()
 {
-	ReadFromFile obj;
- 
 	connect();
 
 	int boardSize = int(sqrt(V));
@@ -123,13 +132,13 @@ void graph::greedyColoring()
 			color[idx++] = obj.vectorBoard[i][j];
 	}
 	//output 
-	for (int i = 0; i < V; i++)
-	{
-		if (i != 0 && i % boardSize == 0) cout << endl;
-		if(color[i]==-1) cout << color[i] << " ";
-		else cout << color[i] << "  ";
-	}
-	cout << endl; cout << endl; cout << endl;
+	//for (int i = 0; i < V; i++)
+	//{
+	//	if (i != 0 && i % boardSize == 0) cout << endl;
+	//	if(color[i]==-1) cout << color[i] << " ";
+	//	else cout << color[i] << "  ";
+	//}
+	//cout << endl; cout << endl; cout << endl;
  
 	for (int cr = 0; cr < V; cr++)
 	{
@@ -180,23 +189,29 @@ void graph::greedyColoring()
 
 	if (canGreedySolve)
 	{
+		ofstream outFile("outputGreedy.txt");
+
 		//output
 		for (int u = 0; u < V; u++) {
 			//cout << "Vertex " << u << " --->  Color " << color[u] << endl;
-			cout << color[u] << "  ";
-			if ((u + 1) % boardSize == 0)  cout << endl;
+			outFile << color[u] << "  ";
+			if ((u + 1) % boardSize == 0)  outFile << endl;
 		}
+
+		outFile.close();
+
+		puts("Output was saved in outputGreedy.txt");
 	}
 	else
 	{
-	//other algo	
-		cout << "Greedy Cant Solve "<<endl;
+		//other algo	
 		for (int i = 0; i < obj.vectorBoard.size(); ++i) {
 			for (int j = 0; j < obj.vectorBoard[i].size(); ++j)
 				if (obj.vectorBoard[i][j] == -1)
 					obj.vectorBoard[i][j] = 0;
 		}
 		SudokuSolver(obj.vectorBoard, boardSize).solve();
+		puts("Output was saved in outputSingle.txt");
 	}
 	
 }
