@@ -4,8 +4,9 @@
 
 class MainState : public BasicState
 {
+	//StateMachine machine;
 public:
-	MainState();
+	MainState(/*StateMachine&*/);
 	virtual void enter() override;
 	virtual void exit() override;
 	virtual void update() override;

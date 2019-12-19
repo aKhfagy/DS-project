@@ -1,11 +1,15 @@
 #include "MainState.h"
 
-MainState::MainState() {};
+MainState::MainState(/*StateMachine& tempMachine*/) {
+	//machine = tempMachine;
+}
 
-void MainState::enter() {};
+void MainState::enter() {
+	ReadFromFile in;
+}
 
-void MainState::exit() {};
+void MainState::exit() {}
 
-void MainState::update() {};
+void MainState::update() {}
 
-void MainState::render() {};
+void MainState::render() {}

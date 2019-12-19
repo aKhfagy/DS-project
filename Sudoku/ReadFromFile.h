@@ -1,10 +1,12 @@
 #pragma once
 #include <fstream>
+#include <vector>
+using namespace std;
 class ReadFromFile
 {
 public:
 	int sizeOfBoard;
-	int**arrayBoard;
+	vector<vector<int>>vectorBoard;
 	ReadFromFile();
 };
 
