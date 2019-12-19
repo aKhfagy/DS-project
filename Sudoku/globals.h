@@ -5,6 +5,5 @@
 #include "graph.h"
 #include "ReadFromFile.h"
 #include "SudokuSolver.h"
-#include "StateMachine.h"
 
 using namespace std;
