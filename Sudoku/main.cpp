@@ -290,13 +290,13 @@ int main()
 {
 	string fileName;
 
-	cout << "Enter file name with extension .txt : "; cin >> fileName;
-	
+	cout << "Enter file name with extension .txt (Name must not contain spaces) : "; cin >> fileName;
+
 	bool cont = true;
 	ReadFromFile read(fileName);
+	graph board(read);
 
 	do {
-		graph board(read);
 		puts("Enter operation you want to do\n1\\ Output one soloution\n2\\ Output all soloutions\n");
 		int operation;
 		cin >> operation;

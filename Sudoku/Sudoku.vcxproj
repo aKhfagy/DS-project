@@ -123,22 +123,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BasicState.cpp" />
     <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainState.cpp" />
     <ClCompile Include="ReadFromFile.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="SudokuSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicState.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="graph.h" />
-    <ClInclude Include="MainState.h" />
     <ClInclude Include="ReadFromFile.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="SudokuSolver.h" />
   </ItemGroup>
   <ItemGroup>
