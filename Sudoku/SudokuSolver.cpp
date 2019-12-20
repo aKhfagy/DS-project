@@ -78,7 +78,7 @@ void SudokuSolver::saveToFile(std::ofstream& outFile) {
 		//outFile << '\n';
 	}
 	outFile << "\n";
-	outFile << "________________________________________________________\n";
+	outFile << "________________________________________________________\n\n\n";
 }
 
 void SudokuSolver::outputAll(bool& flag, std::ofstream& file) {
