@@ -119,13 +119,11 @@ void graph::greedyColoring()
 			count++;
 		}
 	}
-
 	for (int cr = 0; cr < V; cr++)
 	{
 		if (color[cr] != -1) available[cr] = true;
 		else available[cr] = false;
 	}
-
 	//output 
 
 	//for (int i = 0; i < V; i++)
@@ -147,15 +145,11 @@ void graph::greedyColoring()
 		{
 			if (color[*i] != -1)
 			{
-				available[color[*i]] = true;
-			}
+				//cout << *i<<" "<< color[*i]<<endl;
+				available[color[*i]] = true;                 //to make the number (color) taken ie. not available
+			}                                               //to give new colors to the uncolored (empty)
 
-			//cout << *i<<" "<< color[*i]<<endl;
-			available[color[*i]] = true;                 //to make the number (color) taken ie. not available
-		}                                               //to give new colors to the uncolored (empty)
-
-
-
+		}
 		int cntr = 0;
 		int cr;
 		for (cr = 1; cr < V; cr++)
