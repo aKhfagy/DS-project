@@ -64,20 +64,18 @@ bool SudokuSolver::isValid(int x, int y) {
 
 void SudokuSolver::saveToFile(std::ofstream& outFile) {
 	int sectorSize = int(sqrt(size));
+	outFile << size << '\n';
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < size; ++j) {
 			if (j == 0)
-				outFile << ' ' << '|' << ' ';
+				outFile << ' ' ;
 			outFile << grid[i][j] << ' ';
 
 			if ((j + 1) % sectorSize == 0 and j != size - 1)
-				outFile << '|' << ' ';
-			else if (j == size - 1)
-				outFile << '|';
+				outFile <<  ' ';
 		}
 		if ((i + 1) % sectorSize == 0)
 			outFile << "\n";
-		outFile << '\n';
 	}
 	outFile << "\n";
 	outFile << "________________________________________________________\n\n\n";

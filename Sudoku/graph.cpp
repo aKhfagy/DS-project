@@ -39,9 +39,6 @@ void graph::getAll() {
 
 void graph::connect()
 {
-
-
-
 	int size = int(sqrt(V));
 	int sizeOfBoard = int(sqrt(V));
 
@@ -112,14 +109,23 @@ void graph::subbox(int j, int n) // j is the leading element in every sub box,
 void graph::greedyColoring()
 {
 	connect();
-
 	int boardSize = int(sqrt(V));
-
+	int count = 0;
 	for (int i = 0, idx = 0; i < boardSize; i++)
 	{
 		for (int j = 0; j < boardSize; j++)
-			color[idx++] = obj.vectorBoard[i][j];
+		{
+			color[count] = obj.vectorBoard[i][j];
+			count++;
+		}
 	}
+
+	for (int cr = 0; cr < V; cr++)
+	{
+		if (color[cr] != -1) available[cr] = true;
+		else available[cr] = false;
+	}
+
 	//output 
 
 	//for (int i = 0; i < V; i++)
@@ -141,11 +147,14 @@ void graph::greedyColoring()
 		{
 			if (color[*i] != -1)
 			{
-				//cout << *i<<" "<< color[*i]<<endl;
-				available[color[*i]] = true;                 //to make the number (color) taken ie. not available
-			}                                               //to give new colors to the uncolored (empty)
+				available[color[*i]] = true;
+			}
 
-		}
+			//cout << *i<<" "<< color[*i]<<endl;
+			available[color[*i]] = true;                 //to make the number (color) taken ie. not available
+		}                                               //to give new colors to the uncolored (empty)
+
+
 
 		int cntr = 0;
 		int cr;
@@ -156,14 +165,11 @@ void graph::greedyColoring()
 				break;
 			}
 		}
-
-
 		if (color[u] == -1) color[u] = cr;                  //if the cell is empty give it the free color
 
 		for (i = adj[u].begin(); i != adj[u].end(); ++i)       //for optimization (less no. of colors)
 			if (color[u] == -1) color[u] = cr;
 		for (i = adj[u].begin(); i != adj[u].end(); ++i)
-
 		{
 			if (color[*i] != -1)
 			{
@@ -171,6 +177,7 @@ void graph::greedyColoring()
 			}
 		}
 	}
+
 	bool canGreedySolve = true;
 	for (int u = 0; u < V; u++)
 	{
@@ -212,5 +219,5 @@ void graph::greedyColoring()
 graph::~graph()
 {
 	delete[]color;
-	delete[]available;
+	//delete[]available;
 }
