@@ -11,6 +11,12 @@ HWND title;
 void drawEasy(HDC hdc);
 void drawHard(HDC hdc);
 
+int board4[4][4];
+
+int board9[9][9];
+
+bool doneOnce = false;
+
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdshow)
 {
 	// Initialize GDI+
@@ -64,12 +70,12 @@ void open_file(HWND hWnd)
 	MessageBox(NULL, ofn.lpstrFile, "", MB_OK);
 
 }
-LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
+LRESULT WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 {
 	HDC hdc;
 	PAINTSTRUCT ps;
 	int val;
-	ReadFromFile r("input.txt");
+	ReadFromFile r("SudokuData.txt");
 
 	if (r.sizeOfBoard == 4)
 	{
@@ -78,16 +84,64 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		SetBkMode(hdc, TRANSPARENT);
 
 		int count = 0;
-		int board[4][4];
-		graph g(r);
-		g.greedyColoring();
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
+		if (not doneOnce) {
+			graph g(r);
+			g.greedyColoring();
+			bool greedyHasFailed = false;
+			for (int i = 0; i < 4; i++)
 			{
-				board[i][j] = g.color[count];
-				count++;
+				for (int j = 0; j < 4; j++)
+				{
+					if (g.color[count] > r.sizeOfBoard or g.color[count] < 1) {
+						greedyHasFailed = true;
+						break;
+					}
+					board4[i][j] = g.color[count];
+					count++;
+				}
+				if (greedyHasFailed)
+					break;
 			}
+			if (not greedyHasFailed) {
+				for (int i = 0; i < 4 and not greedyHasFailed; ++i) {
+					bool vis[5] = {};
+					for (int j = 0; j < 4 and not greedyHasFailed; ++j) {
+						if (board4[i][j] != 0 and vis[board4[i][j]])
+							greedyHasFailed = true;
+						vis[board4[i][j]] = true;
+					}
+				}
+				for (int i = 0; i < 4 and not greedyHasFailed; ++i) {
+					bool vis[5] = {};
+					for (int j = 0; j < 4 and not greedyHasFailed; ++j) {
+						if (board4[j][i] != 0 and vis[board4[j][i]])
+							greedyHasFailed = true;
+						vis[board4[j][i]] = true;
+					}
+				}
+			}
+			if (greedyHasFailed) {
+				for (int i = 0; i < 4; ++i)
+					for (int j = 0; j < 4; ++j)
+						if (r.vectorBoard[i][j] == -1)
+							r.vectorBoard[i][j] = 0;
+				SudokuSolver(r.vectorBoard, r.sizeOfBoard).solve();
+				ReadFromFile r2("outputSingle.txt");
+				for (int i = 0; i < 4; i++)
+				{
+					for (int j = 0; j < 4; j++)
+					{
+						board4[i][j] = r2.vectorBoard[i][j];
+					}
+				}
+			}
+			if(not greedyHasFailed)
+				for (int i = 0; i < 4; ++i)
+					for (int j = 0; j < 4; ++j)
+						if (r.vectorBoard[i][j] == -1)
+							r.vectorBoard[i][j] = 0;
+			SudokuSolver(r.vectorBoard, r.sizeOfBoard).getAll();
+			doneOnce = true;
 		}
 		for (int i = 0; i < 4; i++)
 		{
@@ -98,19 +152,14 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 				else if (i == 1) x = 125;
 				else if (i == 2) x = 175;
 				else if (i == 3) x = 225;
-				if (board[i][j] != -1)
-				{
-					if (j == 0)
-						TextOut(hdc, 70, x, to_string(board[i][j]).c_str(), 1);
-					else if (j == 1)
-						TextOut(hdc, 125, x, to_string(board[i][j]).c_str(), 1);
-					else if (j == 2)
-						TextOut(hdc, 175, x, to_string(board[i][j]).c_str(), 1);
-					else if (j == 3)
-						TextOut(hdc, 225, x, to_string(board[i][j]).c_str(), 1);
-
-				}
-
+				if (j == 0)
+					TextOut(hdc, 70, x, to_string(board4[i][j]).c_str(), 1);
+				else if (j == 1)
+					TextOut(hdc, 125, x, to_string(board4[i][j]).c_str(), 1);
+				else if (j == 2)
+					TextOut(hdc, 175, x, to_string(board4[i][j]).c_str(), 1);
+				else if (j == 3)
+					TextOut(hdc, 225, x, to_string(board4[i][j]).c_str(), 1);
 			}
 		}
 
@@ -123,20 +172,26 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		SetBkMode(hdc, TRANSPARENT);
 
 		int count = 0;
-		int board[9][9];
-		graph g(r);
-		g.greedyColoring();
-		ReadFromFile r2("outputSingle.txt");
-		for (int i = 0; i < 9; i++)
-		{
-			for (int j = 0; j < 9; j++)
+		if (not doneOnce) {
+			for (int i = 0; i < 9; ++i)
+				for (int j = 0; j < 9; ++j)
+					if (r.vectorBoard[i][j] == -1)
+						r.vectorBoard[i][j] = 0;
+			SudokuSolver(r.vectorBoard, r.sizeOfBoard).solve();
+			ReadFromFile r2("outputSingle.txt");
+			for (int i = 0; i < 9; i++)
 			{
-				if (r2.vectorBoard[i][j] < 10 && r2.vectorBoard[i][j]>0)
+				for (int j = 0; j < 9; j++)
 				{
-					board[i][j] = r2.vectorBoard[i][j];
-					count++;
+					if (r2.vectorBoard[i][j] < 10 && r2.vectorBoard[i][j]>0)
+					{
+						board9[i][j] = r2.vectorBoard[i][j];
+						count++;
+					}
 				}
 			}
+			SudokuSolver(r.vectorBoard, r.sizeOfBoard).getAll();
+			doneOnce = true;
 		}
 		for (int i = 0; i < 9; i++)
 		{
@@ -155,25 +210,25 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 				else if (i == 9) x = 420;
 
 				if (j == 0)
-					TextOut(hdc, 40, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 40, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 1)
-					TextOut(hdc, 70, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 70, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 2)
-					TextOut(hdc, 120, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 120, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 3)
-					TextOut(hdc, 160, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 160, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 4)
-					TextOut(hdc, 200, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 200, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 5)
-					TextOut(hdc, 240, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 240, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 6)
-					TextOut(hdc, 280, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 280, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 7)
-					TextOut(hdc, 320, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 320, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 8)
-					TextOut(hdc, 360, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 360, x, to_string(board9[i][j]).c_str(), 1);
 				else if (j == 9)
-					TextOut(hdc, 225, x, to_string(board[i][j]).c_str(), 1);
+					TextOut(hdc, 225, x, to_string(board9[i][j]).c_str(), 1);
 
 
 			}

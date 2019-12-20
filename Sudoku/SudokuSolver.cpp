@@ -124,7 +124,7 @@ bool SudokuSolver::solveSudoku() {
 
 void SudokuSolver::failed() {
 	std::ofstream outFile("outputSingle.txt");
-	outFile << "There is no solution\n";
+	outFile << 0;
 	outFile.close();
 }
 
