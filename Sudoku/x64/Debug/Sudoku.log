@@ -1,1 +1,4 @@
-﻿  Sudoku.vcxproj -> C:\GitHub projects\DS-project\Sudoku\x64\Debug\Sudoku.exe
+﻿  main.cpp
+c:\users\pc\documents\github\ds-project\sudoku\main.cpp(222): warning C4715: 'WindowProcedure': not all control paths return a value
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\PC\Documents\GitHub\DS-project\Sudoku\x64\Debug\Sudoku.exe : fatal error LNK1120: 1 unresolved externals
