@@ -75,6 +75,7 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 	PAINTSTRUCT ps;
 	int val;
 	ReadFromFile r("SudokuData.txt");
+
 	if (r.sizeOfBoard == 4)
 	{
 		hdc = BeginPaint(hWnd, &ps);
@@ -135,8 +136,11 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		{
 			for (int j = 0; j < 9; j++)
 			{
-				board[i][j] = r2.vectorBoard[i][j];
-				count++;
+				if (r2.vectorBoard[i][j] < 10 && r2.vectorBoard[i][j]>0)
+				{
+					board[i][j] = r2.vectorBoard[i][j];
+					count++;
+				}
 			}
 		}
 		for (int i = 0; i < 9; i++)
@@ -191,9 +195,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 
 		switch (wp)
 		{
-		case FILE_MENU_Upload:
-
-			break;
 		case FILE_MENU_EXIT:
 			val = MessageBoxW(hWnd, L"Are you sure?", L"wait!", MB_YESNO | MB_ICONEXCLAMATION);
 			if (val == IDYES)
@@ -205,6 +206,8 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		case FILE_MENU_NEW:
 			MessageBeep(MB_ICONINFORMATION);
 			break;
+		default:
+			return DefWindowProcW(hWnd, msg, wp, lp);
 		}
 		break;
 	case WM_CREATE:
@@ -281,58 +284,3 @@ void AddMenus(HWND hWnd)
 	AppendMenu(hMenu, MF_STRING, NULL, "Help");
 	SetMenu(hWnd, hMenu);
 }
-
-
-
-
-/*
-int main() 
-{
-	string fileName;
-
-	cout << "Enter file name with extension .txt (Name must not contain spaces) : "; cin >> fileName;
-
-	bool cont = true;
-	ReadFromFile read(fileName);
-	graph board(read);
-
-	do {
-		puts("Enter operation you want to do\n1\\ Output one soloution\n2\\ Output all soloutions\n");
-		int operation;
-		cin >> operation;
-		if (operation < 1 or operation > 2) {
-			puts("Please enter a valid operation!!!!");
-			continue;
-		}
-		if (operation == 1) {
-			board.greedyColoring();
-		}
-		else if (operation == 2) {
-			board.getAll();
-		}
-		bool flag = true;
-		do {
-			puts("Do you want to continue?\nyes\nno");
-			string s; cin >> s;
-			int size = s.size();
-			for (int i = 0; i < size; ++i) {
-				s[i] = tolower(s[i]);
-			}
-			if (s == "no") {
-				cont = false;
-				puts("Bye Bye!!");
-				break;
-			}
-			else if (s == "yes") {
-				break;
-			}
-			else {
-				puts("Please Enter a valid operation!!!");
-			}
-		} while (flag);
-	} while (cont);
-
-	system("pause");
-	return 0;
-}
-*/

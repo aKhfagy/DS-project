@@ -32,45 +32,49 @@ void graph::getAll() {
 void graph::connect()
 {
 
+	int size = int(sqrt(V));
 	int sizeOfBoard = int(sqrt(V));
 
 	//connect every row
-	int s = sizeOfBoard;
+	int s = size;
 	for (int i = 0; i < V; i++) {
 		int inc = 1;
 		for (int j = i + inc; j < s; j++) {
 			addEdge(i, j);
+			//cout << i << " "<< j << endl;
 			inc++;
 		}
-		if ((i + 1) % sizeOfBoard == 0)
-			s += sizeOfBoard;
+		if ((i + 1) % size == 0)
+			s += size;
 		else if (s > V)
 			break;
 	}
 	//connect every column
 
 	for (int i = 0; i < V; i++) {
-		int inc = sizeOfBoard;
+		int inc = size;
 		for (int ctr = 0; ctr < V; ctr++)
 		{
 			int j = i + inc;
 			if (j >= V) break;
 			else {
 				addEdge(i, j);
-				inc += sizeOfBoard;
+				//cout << i <<" "<< j << endl;
+				inc += size;
 			}
 
 		}
 	}
 
 	//connect sub boxes
-	int n = sizeOfBoard;
+	int n = size;
 	int r = sqrt(n);
-	for (int i = 0, ctr1 = 0; i < V, ctr1 < r; i = i + pow(r, r), ctr1++)
+	for (int i = 0, ctr1 = 0; i < V, ctr1 < r; i = i + pow(r, 3), ctr1++) {
 		for (int j = i, ctr2 = 0; j < V, ctr2 < r; j = j + r, ctr2++) {
 			subbox(j, n);
 			//cout << j << endl;
 		}
+	}
 
 }
 
@@ -89,7 +93,7 @@ void graph::subbox(int j, int n) // j is the leading element in every sub box,
 			for (k; k < V; ctr3++, k++) {
 				if (ctr3 == r) break;
 				addEdge(j, k);
-				//	cout << j << "  " << k << endl;
+				//cout << j << "  " << k << endl;
 			}
 		}
 	}
@@ -98,23 +102,16 @@ void graph::subbox(int j, int n) // j is the leading element in every sub box,
 void graph::greedyColoring()
 {
 	connect();
-
 	int boardSize = int(sqrt(V));
-
+	int count = 0;
 	for (int i = 0, idx = 0; i < boardSize; i++)
 	{
 		for (int j = 0; j < boardSize; j++)
-			color[idx++] = obj.vectorBoard[i][j];
+		{
+			color[count] = obj.vectorBoard[i][j];
+			count++;
+		}
 	}
-	//output 
-	//for (int i = 0; i < V; i++)
-	//{
-	//	if (i != 0 && i % boardSize == 0) cout << endl;
-	//	if(color[i]==-1) cout << color[i] << " ";
-	//	else cout << color[i] << "  ";
-	//}
-	//cout << endl; cout << endl; cout << endl;
-
 	for (int cr = 0; cr < V; cr++)
 	{
 		if (color[cr] != -1) available[cr] = true;
@@ -128,12 +125,10 @@ void graph::greedyColoring()
 		{
 			if (color[*i] != -1)
 			{
-				//cout << *i<<" "<< color[*i]<<endl;
 				available[color[*i]] = true;
 			}
 
 		}
-
 		int cntr = 0;
 		int cr;
 		for (cr = 1; cr < V; cr++)
