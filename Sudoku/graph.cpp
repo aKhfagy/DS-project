@@ -5,11 +5,19 @@ using namespace std;
 
 graph::graph(ReadFromFile read)
 {
+
+	obj = read;
+	V = obj.sizeOfBoard * obj.sizeOfBoard;
+	adj.resize(V);
+	color = new int[V];
+	available = new bool[sqrt(V)];
+
 	obj = read;
 	V = obj.sizeOfBoard * obj.sizeOfBoard;
 	adj.resize(V);
 	color = new int[V];
 	available = new bool[V];
+
 }
 
 void graph::addEdge(int v1, int v2) {
@@ -32,45 +40,51 @@ void graph::getAll() {
 void graph::connect()
 {
 
+
+
+	int size = int(sqrt(V));
 	int sizeOfBoard = int(sqrt(V));
 
 	//connect every row
-	int s = sizeOfBoard;
+	int s = size;
 	for (int i = 0; i < V; i++) {
 		int inc = 1;
 		for (int j = i + inc; j < s; j++) {
 			addEdge(i, j);
+			//cout << i << " "<< j << endl;
 			inc++;
 		}
-		if ((i + 1) % sizeOfBoard == 0)
-			s += sizeOfBoard;
+		if ((i + 1) % size == 0)
+			s += size;
 		else if (s > V)
 			break;
 	}
 	//connect every column
 
 	for (int i = 0; i < V; i++) {
-		int inc = sizeOfBoard;
+		int inc = size;
 		for (int ctr = 0; ctr < V; ctr++)
 		{
 			int j = i + inc;
 			if (j >= V) break;
 			else {
 				addEdge(i, j);
-				inc += sizeOfBoard;
+				//cout << i <<" "<< j << endl;
+				inc += size;
 			}
 
 		}
 	}
 
 	//connect sub boxes
-	int n = sizeOfBoard;
+	int n = size;
 	int r = sqrt(n);
-	for (int i = 0, ctr1 = 0; i < V, ctr1 < r; i = i + pow(r, r), ctr1++)
+	for (int i = 0, ctr1 = 0; i < V, ctr1 < r; i = i + pow(r, 3), ctr1++) {
 		for (int j = i, ctr2 = 0; j < V, ctr2 < r; j = j + r, ctr2++) {
 			subbox(j, n);
 			//cout << j << endl;
 		}
+	}
 
 }
 
@@ -89,7 +103,7 @@ void graph::subbox(int j, int n) // j is the leading element in every sub box,
 			for (k; k < V; ctr3++, k++) {
 				if (ctr3 == r) break;
 				addEdge(j, k);
-				//	cout << j << "  " << k << endl;
+				//cout << j << "  " << k << endl;
 			}
 		}
 	}
@@ -107,30 +121,29 @@ void graph::greedyColoring()
 			color[idx++] = obj.vectorBoard[i][j];
 	}
 	//output 
+
 	//for (int i = 0; i < V; i++)
 	//{
 	//	if (i != 0 && i % boardSize == 0) cout << endl;
-	//	if(color[i]==-1) cout << color[i] << " ";
+	//	if(color[i]==-1) cout << color[i] << " ";            //check the read file
 	//	else cout << color[i] << "  ";
 	//}
 	//cout << endl; cout << endl; cout << endl;
 
-	for (int cr = 0; cr < V; cr++)
-	{
-		if (color[cr] != -1) available[cr] = true;
-		else available[cr] = false;
-	}
+//----------------------------
+
+
 	for (int u = 0; u < V; u++)
 	{
 		vector<int>::iterator i;
-		//cout << u << "--->";
+
 		for (i = adj[u].begin(); i != adj[u].end(); ++i)
 		{
 			if (color[*i] != -1)
 			{
 				//cout << *i<<" "<< color[*i]<<endl;
-				available[color[*i]] = true;
-			}
+				available[color[*i]] = true;                 //to make the number (color) taken ie. not available
+			}                                               //to give new colors to the uncolored (empty)
 
 		}
 
@@ -143,8 +156,14 @@ void graph::greedyColoring()
 				break;
 			}
 		}
-		if (color[u] == -1) color[u] = cr;
+
+
+		if (color[u] == -1) color[u] = cr;                  //if the cell is empty give it the free color
+
+		for (i = adj[u].begin(); i != adj[u].end(); ++i)       //for optimization (less no. of colors)
+			if (color[u] == -1) color[u] = cr;
 		for (i = adj[u].begin(); i != adj[u].end(); ++i)
+
 		{
 			if (color[*i] != -1)
 			{
