@@ -1,11 +1,3 @@
-﻿  graph.cpp
-C:\Users\Nemo\Desktop\DS-project\Sudoku\graph.cpp(13,27): warning C4244: 'initializing': conversion from 'double' to 'size_t', possible loss of data
-C:\Users\Nemo\Desktop\DS-project\Sudoku\graph.cpp(78,8): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Nemo\Desktop\DS-project\Sudoku\graph.cpp(79,51): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Nemo\Desktop\DS-project\Sudoku\graph.cpp(92,8): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  main.cpp
-  ReadFromFile.cpp
-  SudokuSolver.cpp
-  Generating Code...
-C:\Users\Nemo\Desktop\DS-project\Sudoku\main.cpp(274): warning C4715: 'WindowProcedure': not all control paths return a value
-  Sudoku.vcxproj -> C:\Users\Nemo\Desktop\DS-project\Sudoku\x64\Debug\Sudoku.exe
+﻿  main.cpp
+C:\GitHub projects\DS-project\Sudoku\main.cpp(274): warning C4715: 'WindowProcedure': not all control paths return a value
+  Sudoku.vcxproj -> C:\GitHub projects\DS-project\Sudoku\x64\Debug\Sudoku.exe

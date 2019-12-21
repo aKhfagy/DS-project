@@ -129,13 +129,10 @@
     <ClCompile Include="SudokuSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicState.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="graph.h" />
-    <ClInclude Include="MainState.h" />
     <ClInclude Include="ReadFromFile.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="SudokuSolver.h" />
   </ItemGroup>
   <ItemGroup>
