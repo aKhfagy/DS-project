@@ -29,6 +29,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="ReadFromFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -37,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="globals.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SudokuSolver.h">
       <Filter>Header Files</Filter>
