@@ -75,7 +75,7 @@ LRESULT WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 	HDC hdc;
 	PAINTSTRUCT ps;
 	int val;
-	ReadFromFile r("input.txt");
+	ReadFromFile r("SudokuData.txt");
 
 	if (r.sizeOfBoard == 4)
 	{
