@@ -34,8 +34,6 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 		NULL, NULL, NULL, NULL);
 
 
-
-
 	MSG msg = { 0 };
 	while (GetMessage(&msg, NULL, NULL, NULL))
 	{
@@ -47,9 +45,6 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsho
 
 	return 0;
 }
-
-
-
 
 void open_file(HWND hWnd)
 {
@@ -86,7 +81,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		int board[4][4];
 		graph g(r);
 		g.greedyColoring();
-		g.getAll();
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -132,7 +126,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		int board[9][9];
 		graph g(r);
 		g.greedyColoring();
-		g.getAll();
 		ReadFromFile r2("outputSingle.txt");
 		for (int i = 0; i < 9; i++)
 		{
@@ -187,7 +180,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
 		}
 
 		EndPaint(hWnd, &ps);
-
 	}
 
 	switch (msg)

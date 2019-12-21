@@ -76,6 +76,7 @@ void SudokuSolver::saveToFile(std::ofstream& outFile) {
 		}
 		if ((i + 1) % sectorSize == 0)
 			outFile << "\n";
+		outFile << '\n';
 	}
 	outFile << "\n";
 	outFile << "________________________________________________________\n\n\n";
