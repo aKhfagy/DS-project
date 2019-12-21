@@ -3,7 +3,9 @@
 #include <fstream>
 using namespace std;
 
-ReadFromFile::ReadFromFile() {}
+ReadFromFile::ReadFromFile() {
+
+}
 
 ReadFromFile::ReadFromFile(string name)
 {
