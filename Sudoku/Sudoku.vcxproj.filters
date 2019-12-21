@@ -49,6 +49,9 @@
     <Text Include="SudokuData.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="outputSingle.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Sudoku.rc">
