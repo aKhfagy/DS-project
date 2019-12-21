@@ -4,7 +4,6 @@
 #include <windows.h>
 #include <string>
 #include <gdiplus.h>
-#include <thread>
 #include "graph.h"
 #include "ReadFromFile.h"
 #include "SudokuSolver.h"

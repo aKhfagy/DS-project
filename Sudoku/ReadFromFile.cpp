@@ -4,7 +4,7 @@
 using namespace std;
 
 ReadFromFile::ReadFromFile() {
-	sizeOfBoard = 0;
+
 }
 
 ReadFromFile::ReadFromFile(string name)
