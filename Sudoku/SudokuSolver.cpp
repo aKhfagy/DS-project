@@ -3,7 +3,7 @@
 SudokuSolver::SudokuSolver() {
 	size = 9;
 	grid.resize(size);
-	for (auto row : grid)
+	for (auto& row : grid)
 		row.resize(size);
 }
 

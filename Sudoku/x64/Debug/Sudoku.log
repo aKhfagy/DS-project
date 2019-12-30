@@ -1,3 +1,5 @@
-﻿  main.cpp
-C:\GitHub projects\DS-project\Sudoku\main.cpp(274): warning C4715: 'WindowProcedure': not all control paths return a value
+﻿  graph.cpp
+C:\GitHub projects\DS-project\Sudoku\graph.cpp(71,8): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\GitHub projects\DS-project\Sudoku\graph.cpp(72,53): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\GitHub projects\DS-project\Sudoku\graph.cpp(85,8): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   Sudoku.vcxproj -> C:\GitHub projects\DS-project\Sudoku\x64\Debug\Sudoku.exe

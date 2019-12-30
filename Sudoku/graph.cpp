@@ -5,13 +5,6 @@ using namespace std;
 
 graph::graph(ReadFromFile read)
 {
-
-	obj = read;
-	V = obj.sizeOfBoard * obj.sizeOfBoard;
-	adj.resize(V);
-	color = new int[V];
-	available = new bool[sqrt(V)];
-
 	obj = read;
 	V = obj.sizeOfBoard * obj.sizeOfBoard;
 	adj.resize(V);
@@ -76,8 +69,8 @@ void graph::connect()
 	//connect sub boxes
 	int n = size;
 	int r = sqrt(n);
-	for (int i = 0, ctr1 = 0; i < V, ctr1 < r; i = i + pow(r, 3), ctr1++) {
-		for (int j = i, ctr2 = 0; j < V, ctr2 < r; j = j + r, ctr2++) {
+	for (int i = 0, ctr1 = 0; i < V && ctr1 < r; i = i + pow(r, 3), ctr1++) {
+		for (int j = i, ctr2 = 0; j < V && ctr2 < r; j = j + r, ctr2++) {
 			subbox(j, n);
 			//cout << j << endl;
 		}
@@ -118,12 +111,12 @@ void graph::greedyColoring()
 			color[count] = obj.vectorBoard[i][j];
 			count++;
 		}
-	}
+	}/*
 	for (int cr = 0; cr < V; cr++)
 	{
 		if (color[cr] != -1) available[cr] = true;
 		else available[cr] = false;
-	}
+	}*/
 	//output 
 
 	//for (int i = 0; i < V; i++)
@@ -161,8 +154,8 @@ void graph::greedyColoring()
 		}
 		if (color[u] == -1) color[u] = cr;                  //if the cell is empty give it the free color
 
-		for (i = adj[u].begin(); i != adj[u].end(); ++i)       //for optimization (less no. of colors)
-			if (color[u] == -1) color[u] = cr;
+		       //for optimization (less no. of colors)
+		
 		for (i = adj[u].begin(); i != adj[u].end(); ++i)
 		{
 			if (color[*i] != -1)
